@@ -10,7 +10,7 @@ import urllib
 server = 'msotest.database.windows.net'
 database = 'msotest'
 username = 'micha'
-password = '2709'
+password = 'Cry0phoenix!'
 driver = 'ODBC Driver 17 for SQL Server'
 
 # Configure logging
@@ -130,12 +130,11 @@ def calculate_final_demand(exploded_demand: pd.DataFrame, inventory_levels: pd.D
 def create_exploded_demand_table(engine):
     with engine.connect() as connection:
         connection.execute(text("""
-        CREATE TABLE IF NOT EXISTS exploded_demand (
+        IF NOT EXISTS (SELECT * FROM sysobjects WHERE name='exploded_demand' AND xtype='U')
+        CREATE TABLE exploded_demand (
             PartID VARCHAR(50),
             Week INT,
             AdjustedDemand DECIMAL(10, 2),
-            // Inventory,
-            // ScheduledReceipt,
             PRIMARY KEY (PartID, Week)
         )
         """))
@@ -162,7 +161,7 @@ def main():
     final_exploded_demand_df.to_csv('final_exploded_demand.csv', index=False)
     final_exploded_demand_df.to_sql('exploded_demand', engine, if_exists='replace', index=False)
 
-    logging.info("Results have been written to 'final_exploded_demand.csv' and the 'exploded_demand' table in MySQL.")
+    logging.info("Results have been written to 'final_exploded_demand.csv' and the 'exploded_demand' table in SQL Server.")
 
 if __name__ == "__main__":
     main()

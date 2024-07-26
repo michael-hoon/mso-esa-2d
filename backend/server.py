@@ -11,7 +11,7 @@ dataframes = {}
 server = 'msotest.database.windows.net'
 database = 'msotest'
 username = 'micha'
-password = '2709'
+password = 'Cry0phoenix!'
 driver = 'ODBC Driver 17 for SQL Server'
 
 connection_string = f'mssql+pyodbc:///?odbc_connect={urllib.parse.quote_plus("DRIVER={"+driver+"};SERVER="+server+";DATABASE="+database+";UID="+username+";PWD="+password)}'
