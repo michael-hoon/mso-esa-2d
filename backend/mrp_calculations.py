@@ -3,6 +3,15 @@ from sqlalchemy import create_engine, text
 from pydantic import BaseModel, Field, field_validator
 from typing import List
 import logging
+import urllib
+
+# sql server details
+
+server = 'msotest.database.windows.net'
+database = 'msotest'
+username = 'micha'
+password = '2709'
+driver = 'ODBC Driver 17 for SQL Server'
 
 # Configure logging
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
@@ -59,7 +68,12 @@ class ExplodedDemand(BaseModel):
     AdjustedDemand: float = Field(..., ge=0)
 
 def load_data_from_mysql():
-    engine = create_engine('mysql+mysqlconnector://root:2709@localhost/msoesatest')
+    # engine = create_engine('mysql+mysqlconnector://root:2709@localhost/msoesatest')
+
+    connection_string = f'mssql+pyodbc:///?odbc_connect={urllib.parse.quote_plus("DRIVER={"+driver+"};SERVER="+server+";DATABASE="+database+";UID="+username+";PWD="+password)}'
+
+    engine = create_engine(connection_string)
+
     data = {}
     data['PartMasterRecord'] = [Part(**row) for row in pd.read_sql_table('PartMasterRecord', engine).to_dict('records')]
     data['BOM'] = [BOMItem(**row) for row in pd.read_sql_table('BOM', engine).to_dict('records')]
@@ -127,7 +141,9 @@ def create_exploded_demand_table(engine):
         """))
 
 def main():
-    engine = create_engine('mysql+mysqlconnector://root:2709@localhost/msoesatest')
+    connection_string = f'mssql+pyodbc:///?odbc_connect={urllib.parse.quote_plus("DRIVER={"+driver+"};SERVER="+server+";DATABASE="+database+";UID="+username+";PWD="+password)}'
+    engine = create_engine(connection_string)
+    # engine = create_engine('mysql+mysqlconnector://root:2709@localhost/msoesatest')
     create_exploded_demand_table(engine)
 
     data = load_data_from_mysql()
