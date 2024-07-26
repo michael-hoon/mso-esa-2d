@@ -158,7 +158,7 @@ def main():
     # Convert back to DataFrame for writing to CSV and MySQL
     final_exploded_demand_df = pd.DataFrame([demand.model_dump() for demand in validated_final_demand])
 
-    final_exploded_demand_df.to_csv('final_exploded_demand.csv', index=False)
+    final_exploded_demand_df.to_csv('data/final_exploded_demand.csv', index=False)
     final_exploded_demand_df.to_sql('exploded_demand', engine, if_exists='replace', index=False)
 
     logging.info("Results have been written to 'final_exploded_demand.csv' and the 'exploded_demand' table in SQL Server.")
