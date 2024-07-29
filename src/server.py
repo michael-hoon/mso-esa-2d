@@ -2,16 +2,26 @@ import pandas as pd
 from sqlalchemy import create_engine
 import urllib
 
-# Read excel file
-excel_path = "data/data.xlsx"
+import os
+from dotenv import load_dotenv
+
+# Load environment variables
+load_dotenv()
+
+# Get the path to the main folder
+main_folder = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
+
+# Path to excel data
+excel_path = os.path.join(main_folder, 'data', 'data.xlsx')
+
 sheets = ['PartMasterRecord', 'BOM', 'DemandForecast', 'Inventory', 'SchReceipt']
 dataframes = {}
 
-# mysql_host = ''
-server = 'msotest.database.windows.net'
-database = 'msotest'
-username = 'micha'
-password = 'Cry0phoenix!'
+# Fetch database details from environment variables
+server = os.getenv('DB_SERVER')
+database = os.getenv('DB_DATABASE')
+username = os.getenv('DB_USERNAME')
+password = os.getenv('DB_PASSWORD')
 driver = 'ODBC Driver 17 for SQL Server'
 
 connection_string = f'mssql+pyodbc:///?odbc_connect={urllib.parse.quote_plus("DRIVER={"+driver+"};SERVER="+server+";DATABASE="+database+";UID="+username+";PWD="+password)}'

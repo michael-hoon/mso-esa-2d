@@ -5,12 +5,17 @@ from typing import List
 import logging
 import urllib
 
-# sql server details
+import os
+from dotenv import load_dotenv
 
-server = 'msotest.database.windows.net'
-database = 'msotest'
-username = 'micha'
-password = 'Cry0phoenix!'
+# Load environment variables
+load_dotenv()
+
+# Fetch database details from environment variables
+server = os.getenv('DB_SERVER')
+database = os.getenv('DB_DATABASE')
+username = os.getenv('DB_USERNAME')
+password = os.getenv('DB_PASSWORD')
 driver = 'ODBC Driver 17 for SQL Server'
 
 # Configure logging
@@ -101,7 +106,7 @@ def adjust_final_demand(demand_forecast: List[DemandForecast], part_master: List
         adjusted_final_demand['Quantity'] -
         adjusted_final_demand['Inventory'].fillna(0) -
         adjusted_final_demand['Receipt'].fillna(0)
-    ).clip(lower=0)
+    ).clip(lower=0) # set lower bound of inventory to 0
     return adjusted_final_demand[['PartID', 'Week', 'AdjustedDemand']]
 
 def explode_bom(demand: pd.DataFrame, bom: List[BOMItem], part_master_record: List[Part]) -> pd.DataFrame:
@@ -112,10 +117,18 @@ def explode_bom(demand: pd.DataFrame, bom: List[BOMItem], part_master_record: Li
 
     demand = demand.merge(part_master_df[['PartID', 'LeadTime']], on='PartID')
     demand['Week'] -= demand['LeadTime']
+
+    # If the demand does not have ParentID, set it from itself (initial demand level)
+    if 'ParentID' not in demand.columns:
+        demand['ParentID'] = demand['PartID']
+
     exploded_demand = demand.merge(bom_df, left_on='PartID', right_on='ParentID')
+    exploded_demand = exploded_demand.rename(columns={"ParentID_y": "ParentID"})
     exploded_demand['Quantity'] *= exploded_demand['Demand']
-    exploded_demand = exploded_demand[['ChildID', 'Week', 'Quantity']].rename(columns={'ChildID': 'PartID', 'Quantity': 'Demand'})
-    return pd.concat([demand[['PartID', 'Week', 'Demand']], explode_bom(exploded_demand, bom, part_master_record)])
+    exploded_demand = exploded_demand[['ChildID', 'Week', 'Quantity']].rename(columns={'ChildID': 'PartID', 
+                                                                                       'Quantity': 'Demand'
+                                                                                       })
+    return pd.concat([demand[['PartID', 'Week', 'Demand', 'ParentID']], explode_bom(exploded_demand, bom, part_master_record)])
 
 def calculate_final_demand(exploded_demand: pd.DataFrame, inventory_levels: pd.DataFrame, part_master: List[Part]) -> pd.DataFrame:
     part_master_df = pd.DataFrame([pm.model_dump() for pm in part_master])
