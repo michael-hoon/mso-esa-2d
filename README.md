@@ -32,7 +32,16 @@ mso-esa-2d/
 ├── README.md
 └── requirements.txt
 ```
+### Built With
 
+* [![Next][Next.js]][Next-url]
+* [![React][React.js]][React-url]
+* [![Vue][Vue.js]][Vue-url]
+* [![Angular][Angular.io]][Angular-url]
+* [![Svelte][Svelte.dev]][Svelte-url]
+* [![Laravel][Laravel.com]][Laravel-url]
+* [![Bootstrap][Bootstrap.com]][Bootstrap-url]
+* [![JQuery][JQuery.com]][JQuery-url]
 ## System Architecture
 
 ![System Architecture Diagram](https://github.com/michael-hoon/mso-esa-2d/blob/main/Images/mso_architecture.jpg)
@@ -69,7 +78,11 @@ mso-esa-2d/
     git clone https://github.com/michael-hoon/mso-esa-2d.git
     cd mso-esa-2d
 
-#### 2. Create and configure the .env file:
+#### 2. Install all required dependencies for the system
+
+    pip install -r requirements.txt
+
+#### 3. Create and configure the .env file:
 Create a .env file in the main directory with your Azure database credentials.
 
     DB_SERVER=your_db_server
@@ -77,15 +90,15 @@ Create a .env file in the main directory with your Azure database credentials.
     DB_USERNAME=your_db_username
     DB_PASSWORD=your_db_password
 
-#### 3. Build the Docker images:
+#### 4. Build the Docker images:
 
     docker-compose build
 
-#### 4. Start the services:
+#### 5. Start the services:
 
     docker-compose up -d
 
-#### 5. Access Airflow Web UI:
+#### 6. Access Airflow Web UI:
 
 If you want Airflow to be containerised for production environments, [follow the instructions in the official source documentation here](https://airflow.apache.org/docs/apache-airflow/stable/howto/docker-compose/index.html). Note that for production environments, Airflow suggests using [Kubernetes as an orchestration tool](https://airflow.apache.org/docs/helm-chart/stable/index.html) instead as Docker is not officially supported yet.
 
@@ -96,7 +109,11 @@ If you want Airflow to be containerised for production environments, [follow the
     git clone https://github.com/michael-hoon/mso-esa-2d.git
     cd mso-esa-2d
 
-#### 2. Create and configure the .env file:
+#### 2. Install all required dependencies for the system
+
+    pip install -r requirements.txt
+
+#### 3. Create and configure the .env file:
 Create a .env file in the main directory with your database credentials.
 
     DB_SERVER=your_db_server
@@ -104,7 +121,7 @@ Create a .env file in the main directory with your database credentials.
     DB_USERNAME=your_db_username
     DB_PASSWORD=your_db_password
 
-#### 3. Access Airflow Web UI:
+#### 4. Access Airflow Web UI:
 
 Ensure that the $PATH directory for your DAGs is set to the current directory under `airflow/dags/`. Do this by navigating to the folder where Airflow is installed (if via PyPI, it should be under `/home/user/airflow/`) and modify the variable `dags_folder` to `~/mso-esa-2d/airflow/dags` (for Linux systems):
 
@@ -133,6 +150,8 @@ Airflow will serve as an **orchestration and automated monitoring tool** for the
 
 ![Airflow UI Monitoring](https://github.com/michael-hoon/mso-esa-2d/blob/main/Images/airflow_ui_zoomed.png)
 
+The figures above show an example automated scheduling workflow, tracking days where the MRP system is down or unavailable to the end user. The Airflow user can then arrange for automated emails to be sent to the team to notify them about downtimes and potential faults of the system.
+
 ### Project Workflow (Automated Process via Apache Airflow)
 
 #### 1. Load Data into SQL Server:
@@ -149,17 +168,16 @@ The Airflow DAG (mrp_workflow_dag.py) automates the execution of the above scrip
 
 ## Directory and Files
 
-- `backend/data`: Contains the input data files.
-- `backend/server.py`: Script to load data into SQL Server.
-- `backend/mrp_calculations.py`: Script to perform MRP calculations.
-- `backend/.env`: Environment variables for database connection.
-- `backend/requirements.txt`: Python dependencies.
-- `dags/mrp_workflow_dag.py`: Airflow DAG for the MRP workflow.
-- `logs/`: Directory for Airflow logs.
-- `plugins/`: Directory for any custom Airflow plugins.
+- `/data/data.xlsx`: Contains the input data files.
+- `src/server.py`: Script to load data into SQL Server.
+- `src/mrp_calculations.py`: Script to perform MRP calculations.
+- `.env`: Environment variables for database connection.
+- `requirements.txt`: Python dependencies.
+- `airflow/dags/mrp_workflow_dag.py`: Script to define Airflow DAG for the MRP workflow.
 - `Dockerfile.server`: Dockerfile for the server.py script.
 - `Dockerfile.mrp_calculations`: Dockerfile for the mrp_calculations.py script.
 - `docker-compose.yml`: Docker Compose configuration file.
+- `Images`: Folder to store images for the README file.
 
 ## Contributing
 
