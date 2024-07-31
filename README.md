@@ -34,7 +34,7 @@ mso-esa-2d/
 ```
 ## System Architecture
 
-![System Architecture Diagram](https://github.com/michael-hoon/mso-esa-2d/blob/main/Images/mso_architecture.jpg)
+![System Architecture Diagram](https://github.com/michael-hoon/mso-esa-2d/blob/main/Images/mso_architecture.png)
 
 ## Components
 
