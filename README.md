@@ -4,7 +4,7 @@ This repository demonstrates a Materials Requirement Planning (MRP) backend syst
 
 Our project is also designed to be modular in nature, where every component or tool used to develop this backend service can be easily replaced without major faults in the overall system. For example, users can opt to host their database locally using a `MySQL` connection on `localhost` and serve their own database solutions. 
 
-## Project Structure
+## Backend Project Structure
 
 ```plaintext
 mso-esa-2d/
@@ -45,7 +45,9 @@ mso-esa-2d/
 
 ### Airflow
 
-- `mrp_workflow_dag.py`: Defines the Airflow Directed Acyclic Graph (DAG) to automate the execution of `server.py` and `mrp_calculations.py`. For more information, vist the [official Gihub Repository](https://github.com/apache/airflow).
+- `mrp_workflow_dag.py`: Defines the Airflow Directed Acyclic Graph (DAG) to automate the execution of `server.py` and `mrp_calculations.py`. For more information, vist the [official Gihub Repository](https://github.com/apache/airflow). 
+
+> Note: Apache Airflow is only officially supported for use on Unix-based systems. If you would like to run this repository on a Windows machine, either install the [Windows Subsystem for Linux (WSL)](https://learn.microsoft.com/en-us/windows/wsl/install) or run the Airflow service via a Docker container. 
 
 ### Docker
 
@@ -93,7 +95,6 @@ Create a .env file in the main directory with your Azure database credentials.
 If you want Airflow to be containerised for production environments, [follow the instructions in the official source documentation here](https://airflow.apache.org/docs/apache-airflow/stable/howto/docker-compose/index.html). Note that for production environments, Airflow suggests using [Kubernetes as an orchestration tool](https://airflow.apache.org/docs/helm-chart/stable/index.html) instead as Docker is not officially supported yet.
 
 ### Setting Up the Environment (Using Local Install)
-
 #### 1. Clone the repository:
 
     git clone https://github.com/michael-hoon/mso-esa-2d.git
@@ -168,6 +169,14 @@ The Airflow DAG (mrp_workflow_dag.py) automates the execution of the above scrip
 - `Dockerfile.mrp_calculations`: Dockerfile for the mrp_calculations.py script.
 - `docker-compose.yml`: Docker Compose configuration file.
 - `Images`: Folder to store images for the README file.
+
+# Frontend Interface 
+
+For the purposes of displaying the Exploded demand results from the MRP calculations, we have decided to opt for Tableau as a Front-end Interface.
+
+## 1. Connecting Azure Database to Tableau Frontend
+
+To connect to a Tableau frontend interface, first install [Tableau Desktop](https://www.tableau.com/products/desktop/download). On the tab below, select the Microsoft Azure Database option for uploading of data. Connect to the instance by entering the details of the server admin. 
 
 ## Contributing
 
