@@ -32,16 +32,6 @@ mso-esa-2d/
 ├── README.md
 └── requirements.txt
 ```
-### Built With
-
-* [![Next][Next.js]][Next-url]
-* [![React][React.js]][React-url]
-* [![Vue][Vue.js]][Vue-url]
-* [![Angular][Angular.io]][Angular-url]
-* [![Svelte][Svelte.dev]][Svelte-url]
-* [![Laravel][Laravel.com]][Laravel-url]
-* [![Bootstrap][Bootstrap.com]][Bootstrap-url]
-* [![JQuery][JQuery.com]][JQuery-url]
 ## System Architecture
 
 ![System Architecture Diagram](https://github.com/michael-hoon/mso-esa-2d/blob/main/Images/mso_architecture.jpg)
@@ -55,7 +45,7 @@ mso-esa-2d/
 
 ### Airflow
 
-- `mrp_workflow_dag.py`: Defines the Airflow Directed Acyclic Graph (DAG) to automate the execution of `server.py` and `mrp_calculations.py`. 
+- `mrp_workflow_dag.py`: Defines the Airflow Directed Acyclic Graph (DAG) to automate the execution of `server.py` and `mrp_calculations.py`. For more information, vist the [official Gihub Repository](https://github.com/apache/airflow).
 
 ### Docker
 
@@ -185,4 +175,4 @@ Our project is a free and open sourced solution, under the MIT License. Contribu
 
 ## License
 
-This project is licensed under the MIT License. See `LICENSE.txt` for more information.
+This project is licensed under the MIT License. See `LICENSE.txt` for more information. <p align="right">(<a href="#readme-top">back to top</a>)</p>
