@@ -31,6 +31,11 @@ mso-esa-2d/
 └── requirements.txt
 ```
 
+## System Architecture
+
+https://github.com/michael-hoon/mso-esa-2d/blob/main/Images/mso_architecture.png
+![System Architecture Diagram](https://github.com/michael-hoon/mso-esa-2d/blob/main/Images/mso_architecture.png)
+
 ## Components
 
 ### Backend
@@ -110,6 +115,12 @@ Create a .env file in the backend/ directory with your database credentials.
 #### 5. Access Airflow Web UI:
 
 Navigate to http://localhost:8080 to access the Airflow web interface. Use the credentials admin for both the username and password.
+
+### Airflow UI
+
+![Airflow UI Example](https://github.com/michael-hoon/mso-esa-2d/blob/main/Images/airflow_ui.png)
+
+![Airflow UI Monitoring](https://github.com/michael-hoon/mso-esa-2d/blob/main/Images/airflow_ui_zoomed.png)
 
 ### Project Workflow
 
