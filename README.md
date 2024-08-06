@@ -178,9 +178,15 @@ For the purposes of displaying the Exploded demand results from the MRP calculat
 
 To connect to a Tableau frontend interface, first install [Tableau Desktop](https://www.tableau.com/products/desktop/download). On the tab below, select the Microsoft Azure Database option for uploading of data. Connect to the instance by entering the details of the server admin. 
 
+![Tableau Login Page](https://github.com/michael-hoon/mso-esa-2d/blob/main/Images/tableaulogin.jpg)
+
 ## 2. Tableau Front-End Display 
 
+![Tableau Data Page](https://github.com/michael-hoon/mso-esa-2d/blob/main/Images/tableaumain.jpg)
 
+## 3. Tableau Main Dashboard UI 
+
+![Tableau UI](https://github.com/michael-hoon/mso-esa-2d/blob/main/Images/tableaudashboard.jpg)
 
 ## Contributing
 
