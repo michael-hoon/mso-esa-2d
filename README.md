@@ -178,6 +178,10 @@ For the purposes of displaying the Exploded demand results from the MRP calculat
 
 To connect to a Tableau frontend interface, first install [Tableau Desktop](https://www.tableau.com/products/desktop/download). On the tab below, select the Microsoft Azure Database option for uploading of data. Connect to the instance by entering the details of the server admin. 
 
+## 2. Tableau Front-End Display 
+
+
+
 ## Contributing
 
 Our project is a free and open sourced solution, under the MIT License. Contributions are welcome! Please submit a pull request or open an issue to discuss any changes.
