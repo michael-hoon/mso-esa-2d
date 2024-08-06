@@ -174,17 +174,21 @@ The Airflow DAG (mrp_workflow_dag.py) automates the execution of the above scrip
 
 For the purposes of displaying the Exploded demand results from the MRP calculations, we have decided to opt for Tableau as a Front-end Interface.
 
-## 1. Connecting Azure Database to Tableau Frontend
+## 1. Download the Tableau Files
+
+Tableau files are in the `tableau` folder of this repository. Download the `.twb` file and open it in Tableau Desktop.
+
+## 2. Connecting Azure Database to Tableau Frontend
 
 To connect to a Tableau frontend interface, first install [Tableau Desktop](https://www.tableau.com/products/desktop/download). On the tab below, select the Microsoft Azure Database option for uploading of data. Connect to the instance by entering the details of the server admin. 
 
 ![Tableau Login Page](https://github.com/michael-hoon/mso-esa-2d/blob/main/Images/tableaulogin.jpg)
 
-## 2. Tableau Front-End Display 
+## 3. Tableau Front-End Display 
 
-![Tableau Data Page](https://github.com/michael-hoon/mso-esa-2d/blob/main/Images/tableaumain.jpg)
+Once done, ![Tableau Data Page](https://github.com/michael-hoon/mso-esa-2d/blob/main/Images/tableaumain.jpg)
 
-## 3. Tableau Main Dashboard UI 
+## 4. Tableau Main Dashboard UI 
 
 ![Tableau UI](https://github.com/michael-hoon/mso-esa-2d/blob/main/Images/tableaudashboard.jpg)
 
